@@ -1,0 +1,1952 @@
+\documentclass[11pt]{article}
+
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+    \usepackage{iftex}
+    \ifPDFTeX
+    	\usepackage[T1]{fontenc}
+    	\usepackage{mathpazo}
+    \else
+    	\usepackage{fontspec}
+    \fi
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range
+    \makeatletter % fix for grffile with XeLaTeX
+    \def\Gread@@xetex#1{%
+      \IfFileExists{"\Gin@base".bb}%
+      {\Gread@eps{\Gin@base.bb}}%
+      {\Gread@@xetex@aux#1}%
+    }
+    \makeatother
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{C3\_W2\_RecSysNN\_Assignment}
+    
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb. 
+    \makeatletter
+        \newbox\Wrappedcontinuationbox 
+        \newbox\Wrappedvisiblespacebox 
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}} 
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}} 
+        \newcommand*\Wrappedcontinuationindent {3ex } 
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox} 
+        % Take advantage of the already applied Pygments mark-up to insert 
+        % potential linebreaks for TeX processing. 
+        %        {, <, #, %, $, ' and ": go to next line. 
+        %        _, }, ^, &, >, - and ~: stay at end of broken line. 
+        % Use of \textquotesingle for straight quote. 
+        \newcommand*\Wrappedbreaksatspecials {% 
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}% 
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}% 
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}% 
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}% 
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}% 
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}% 
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}% 
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}% 
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}% 
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}% 
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}% 
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}% 
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}% 
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}% 
+        } 
+        % Some characters . , ; ? ! / are not pygmentized. 
+        % This macro makes them "active" and they will insert potential linebreaks 
+        \newcommand*\Wrappedbreaksatpunct {% 
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}% 
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}% 
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}% 
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}% 
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}% 
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}% 
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}% 
+            \catcode`\.\active
+            \catcode`\,\active 
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active 
+            \lccode`\~`\~ 	
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+        
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+    
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        \ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+\begin{document}
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{practice-lab-deep-learning-for-content-based-filtering}{%
+\section{\texorpdfstring{ Practice lab: Deep Learning for Content-Based
+Filtering}{ Practice lab: Deep Learning for Content-Based Filtering}}\label{practice-lab-deep-learning-for-content-based-filtering}}
+
+In this exercise, you will implement content-based filtering using a
+neural network to build a recommender system for movies.
+
+\hypertarget{outline}{%
+\section{Outline}\label{outline}}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{1}
+\item
+  Section \ref{2}
+\item
+  Section \ref{3}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{31}
+  \item
+    Section \ref{32}
+  \end{itemize}
+\item
+  Section \ref{4}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{ex01}
+  \end{itemize}
+\item
+  Section \ref{5}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{51}
+  \item
+    Section \ref{52}
+  \item
+    Section \ref{53}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Section \ref{ex02}
+    \end{itemize}
+  \end{itemize}
+\item
+  Section \ref{6}
+\end{itemize}
+
+    \emph{\textbf{NOTE:} To prevent errors from the autograder, you are not
+allowed to edit or delete non-graded cells in this lab. Please also
+refrain from adding any new cells. \textbf{Once you have passed this
+assignment} and want to experiment with any of the non-graded code, you
+may follow the instructions at the bottom of this notebook.}
+
+    \#\# 1 - Packages We will use familiar packages, NumPy, TensorFlow and
+helpful routines from
+\href{https://scikit-learn.org/stable/}{scikit-learn}. We will also use
+\href{https://pypi.org/project/tabulate/}{tabulate} to neatly print
+tables and \href{https://pandas.pydata.org/}{Pandas} to organize tabular
+data.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{ma} \PY{k}{as} \PY{n+nn}{ma}
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+\PY{k+kn}{from} \PY{n+nn}{tensorflow} \PY{k+kn}{import} \PY{n}{keras}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k+kn}{import} \PY{n}{StandardScaler}\PY{p}{,} \PY{n}{MinMaxScaler}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\PY{k+kn}{import} \PY{n+nn}{tabulate}
+\PY{k+kn}{from} \PY{n+nn}{recsysNN\PYZus{}utils} \PY{k+kn}{import} \PY{o}{*}
+\PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{display.precision}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \#\# 2 - Movie ratings dataset The data set is derived from the
+\href{https://grouplens.org/datasets/movielens/latest/}{MovieLens
+ml-latest-small} dataset.
+
+{[}F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens
+Datasets: History and Context. ACM Transactions on Interactive
+Intelligent Systems (TiiS) 5, 4: 19:1--19:19.
+\url{https://doi.org/10.1145/2827872}{]}
+
+The original dataset has roughly 9000 movies rated by 600 users with
+ratings on a scale of 0.5 to 5 in 0.5 step increments. The dataset has
+been reduced in size to focus on movies from the years since 2000 and
+popular genres. The reduced dataset has \(n_u = 397\) users,
+\(n_m= 847\) movies and 25521 ratings. For each movie, the dataset
+provides a movie title, release date, and one or more genres. For
+example ``Toy Story 3'' was released in 2010 and has several genres:
+``Adventure\textbar Animation\textbar Children\textbar Comedy\textbar Fantasy''.
+This dataset contains little information about users other than their
+ratings. This dataset is used to create training vectors for the neural
+networks described below. Let's learn a bit more about this data set.
+The table below shows the top 10 movies ranked by the number of ratings.
+These movies also happen to have high average ratings. How many of these
+movies have you watched?
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{top10\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./data/content\PYZus{}top10\PYZus{}df.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{bygenre\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./data/content\PYZus{}bygenre\PYZus{}df.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{top10\PYZus{}df}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+   movie id  num ratings  ave rating  \textbackslash{}
+0      4993          198         4.1
+1      5952          188         4.0
+2      7153          185         4.1
+3      4306          170         3.9
+4     58559          149         4.2
+5      6539          149         3.8
+6     79132          143         4.1
+7      6377          141         4.0
+8      4886          132         3.9
+9      7361          131         4.2
+
+                                               title  \textbackslash{}
+0  Lord of the Rings: The Fellowship of the Ring,{\ldots}
+1             Lord of the Rings: The Two Towers, The
+2     Lord of the Rings: The Return of the King, The
+3                                              Shrek
+4                                   Dark Knight, The
+5  Pirates of the Caribbean: The Curse of the Bla{\ldots}
+6                                          Inception
+7                                       Finding Nemo
+8                                     Monsters, Inc.
+9              Eternal Sunshine of the Spotless Mind
+
+                                              genres
+0                                  Adventure|Fantasy
+1                                  Adventure|Fantasy
+2                     Action|Adventure|Drama|Fantasy
+3  Adventure|Animation|Children|Comedy|Fantasy|Ro{\ldots}
+4                                 Action|Crime|Drama
+5                    Action|Adventure|Comedy|Fantasy
+6         Action|Crime|Drama|Mystery|Sci-Fi|Thriller
+7                Adventure|Animation|Children|Comedy
+8        Adventure|Animation|Children|Comedy|Fantasy
+9                               Drama|Romance|Sci-Fi
+\end{Verbatim}
+\end{tcolorbox}
+        
+    The next table shows information sorted by genre. The number of ratings
+per genre vary substantially. Note that a movie may have multiple
+genre's so the sum of the ratings below is larger than the number of
+original ratings.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{bygenre\PYZus{}df}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+          genre  num movies  ave rating/genre  ratings per genre
+0        Action         321               3.4              10377
+1     Adventure         234               3.4               8785
+2     Animation          76               3.6               2588
+3      Children          69               3.4               2472
+4        Comedy         326               3.4               8911
+5         Crime         139               3.5               4671
+6   Documentary          13               3.8                280
+7         Drama         342               3.6              10201
+8       Fantasy         124               3.4               4468
+9        Horror          56               3.2               1345
+10      Mystery          68               3.6               2497
+11      Romance         151               3.4               4468
+12       Sci-Fi         174               3.4               5894
+13     Thriller         245               3.4               7659
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \#\# 3 - Content-based filtering with a neural network
+
+In the collaborative filtering lab, you generated two vectors, a user
+vector and an item/movie vector whose dot product would predict a
+rating. The vectors were derived solely from the ratings.
+
+Content-based filtering also generates a user and movie feature vector
+but recognizes there may be other information available about the user
+and/or movie that may improve the prediction. The additional information
+is provided to a neural network which then generates the user and movie
+vector as shown below.
+
+\#\#\# 3.1 Training Data The movie content provided to the network is a
+combination of the original data and some `engineered features'. Recall
+the feature engineering discussion and lab from Course 1, Week 2, lab 4.
+The original features are the year the movie was released and the
+movie's genre's presented as a one-hot vector. There are 14 genres. The
+engineered feature is an average rating derived from the user ratings.
+
+The user content is composed of engineered features. A per genre average
+rating is computed per user. Additionally, a user id, rating count and
+rating average are available but not included in the training or
+prediction content. They are carried with the data set because they are
+useful in interpreting data.
+
+The training set consists of all the ratings made by the users in the
+data set. Some ratings are repeated to boost the number of training
+examples of underrepresented genre's. The training set is split into two
+arrays with the same number of entries, a user array and a movie/item
+array.
+
+Below, let's load and display some of the data.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Load Data, set configuration variables}
+\PY{n}{item\PYZus{}train}\PY{p}{,} \PY{n}{user\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{item\PYZus{}features}\PY{p}{,} \PY{n}{user\PYZus{}features}\PY{p}{,} \PY{n}{item\PYZus{}vecs}\PY{p}{,} \PY{n}{movie\PYZus{}dict}\PY{p}{,} \PY{n}{user\PYZus{}to\PYZus{}genre} \PY{o}{=} \PY{n}{load\PYZus{}data}\PY{p}{(}\PY{p}{)}
+
+\PY{n}{num\PYZus{}user\PYZus{}features} \PY{o}{=} \PY{n}{user\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}  \PY{c+c1}{\PYZsh{} remove userid, rating count and ave rating during training}
+\PY{n}{num\PYZus{}item\PYZus{}features} \PY{o}{=} \PY{n}{item\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}  \PY{c+c1}{\PYZsh{} remove movie id at train time}
+\PY{n}{uvs} \PY{o}{=} \PY{l+m+mi}{3}  \PY{c+c1}{\PYZsh{} user genre vector start}
+\PY{n}{ivs} \PY{o}{=} \PY{l+m+mi}{3}  \PY{c+c1}{\PYZsh{} item genre vector start}
+\PY{n}{u\PYZus{}s} \PY{o}{=} \PY{l+m+mi}{3}  \PY{c+c1}{\PYZsh{} start of columns to use in training, user}
+\PY{n}{i\PYZus{}s} \PY{o}{=} \PY{l+m+mi}{1}  \PY{c+c1}{\PYZsh{} start of columns to use in training, items}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of training vectors: }\PY{l+s+si}{\PYZob{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{item\PYZus{}train}\PY{p}{)}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of training vectors: 50884
+    \end{Verbatim}
+
+    Let's look at the first few entries in the user training array.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{pprint\PYZus{}train}\PY{p}{(}\PY{n}{user\PYZus{}train}\PY{p}{,} \PY{n}{user\PYZus{}features}\PY{p}{,} \PY{n}{uvs}\PY{p}{,}  \PY{n}{u\PYZus{}s}\PY{p}{,} \PY{n}{maxcount}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+'<table>\textbackslash{}n<thead>\textbackslash{}n<tr><th style="text-align: center;"> [user id] </th><th
+style="text-align: center;"> [rating count] </th><th style="text-align:
+center;"> [rating ave] </th><th style="text-align: center;"> Act ion </th><th
+style="text-align: center;"> Adve nture </th><th style="text-align: center;">
+Anim ation </th><th style="text-align: center;"> Chil dren </th><th style="text-
+align: center;"> Com edy </th><th style="text-align: center;"> Crime </th><th
+style="text-align: center;"> Docum entary </th><th style="text-align: center;">
+Drama </th><th style="text-align: center;"> Fan tasy </th><th style="text-align:
+center;"> Hor ror </th><th style="text-align: center;"> Mys tery </th><th
+style="text-align: center;"> Rom ance </th><th style="text-align: center;"> Sci
+-Fi </th><th style="text-align: center;"> Thri ller
+</th></tr>\textbackslash{}n</thead>\textbackslash{}n<tbody>\textbackslash{}n<tr><td style="text-align: center;">     2
+</td><td style="text-align: center;">       22       </td><td style="text-align:
+center;">     4.0      </td><td style="text-align: center;">   4.0   </td><td
+style="text-align: center;">    4.2     </td><td style="text-align: center;">
+0.0     </td><td style="text-align: center;">    0.0    </td><td style="text-
+align: center;">   4.0   </td><td style="text-align: center;">  4.1  </td><td
+style="text-align: center;">     4.0      </td><td style="text-align: center;">
+4.0  </td><td style="text-align: center;">   0.0    </td><td style="text-align:
+center;">   3.0   </td><td style="text-align: center;">   4.0    </td><td
+style="text-align: center;">   0.0    </td><td style="text-align: center;">
+3.9   </td><td style="text-align: center;">    3.9    </td></tr>\textbackslash{}n<tr><td
+style="text-align: center;">     2     </td><td style="text-align: center;">
+22       </td><td style="text-align: center;">     4.0      </td><td
+style="text-align: center;">   4.0   </td><td style="text-align: center;">
+4.2     </td><td style="text-align: center;">    0.0     </td><td style="text-
+align: center;">    0.0    </td><td style="text-align: center;">   4.0
+</td><td style="text-align: center;">  4.1  </td><td style="text-align:
+center;">     4.0      </td><td style="text-align: center;">  4.0  </td><td
+style="text-align: center;">   0.0    </td><td style="text-align: center;">
+3.0   </td><td style="text-align: center;">   4.0    </td><td style="text-align:
+center;">   0.0    </td><td style="text-align: center;">   3.9   </td><td
+style="text-align: center;">    3.9    </td></tr>\textbackslash{}n<tr><td style="text-align:
+center;">     2     </td><td style="text-align: center;">       22
+</td><td style="text-align: center;">     4.0      </td><td style="text-align:
+center;">   4.0   </td><td style="text-align: center;">    4.2     </td><td
+style="text-align: center;">    0.0     </td><td style="text-align: center;">
+0.0    </td><td style="text-align: center;">   4.0   </td><td style="text-align:
+center;">  4.1  </td><td style="text-align: center;">     4.0      </td><td
+style="text-align: center;">  4.0  </td><td style="text-align: center;">   0.0
+</td><td style="text-align: center;">   3.0   </td><td style="text-align:
+center;">   4.0    </td><td style="text-align: center;">   0.0    </td><td
+style="text-align: center;">   3.9   </td><td style="text-align: center;">
+3.9    </td></tr>\textbackslash{}n<tr><td style="text-align: center;">     2     </td><td
+style="text-align: center;">       22       </td><td style="text-align:
+center;">     4.0      </td><td style="text-align: center;">   4.0   </td><td
+style="text-align: center;">    4.2     </td><td style="text-align: center;">
+0.0     </td><td style="text-align: center;">    0.0    </td><td style="text-
+align: center;">   4.0   </td><td style="text-align: center;">  4.1  </td><td
+style="text-align: center;">     4.0      </td><td style="text-align: center;">
+4.0  </td><td style="text-align: center;">   0.0    </td><td style="text-align:
+center;">   3.0   </td><td style="text-align: center;">   4.0    </td><td
+style="text-align: center;">   0.0    </td><td style="text-align: center;">
+3.9   </td><td style="text-align: center;">    3.9    </td></tr>\textbackslash{}n<tr><td
+style="text-align: center;">     2     </td><td style="text-align: center;">
+22       </td><td style="text-align: center;">     4.0      </td><td
+style="text-align: center;">   4.0   </td><td style="text-align: center;">
+4.2     </td><td style="text-align: center;">    0.0     </td><td style="text-
+align: center;">    0.0    </td><td style="text-align: center;">   4.0
+</td><td style="text-align: center;">  4.1  </td><td style="text-align:
+center;">     4.0      </td><td style="text-align: center;">  4.0  </td><td
+style="text-align: center;">   0.0    </td><td style="text-align: center;">
+3.0   </td><td style="text-align: center;">   4.0    </td><td style="text-align:
+center;">   0.0    </td><td style="text-align: center;">   3.9   </td><td
+style="text-align: center;">    3.9    </td></tr>\textbackslash{}n</tbody>\textbackslash{}n</table>'
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Some of the user and item/movie features are not used in training. In
+the table above, the features in brackets ``{[}{]}'' such as the ``user
+id'', ``rating count'' and ``rating ave'' are not included when the
+model is trained and used. Above you can see the per genre rating
+average for user 2. Zero entries are genre's which the user had not
+rated. The user vector is the same for all the movies rated by a user.\\
+Let's look at the first few entries of the movie/item array.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{pprint\PYZus{}train}\PY{p}{(}\PY{n}{item\PYZus{}train}\PY{p}{,} \PY{n}{item\PYZus{}features}\PY{p}{,} \PY{n}{ivs}\PY{p}{,} \PY{n}{i\PYZus{}s}\PY{p}{,} \PY{n}{maxcount}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{user}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+'<table>\textbackslash{}n<thead>\textbackslash{}n<tr><th style="text-align: center;"> [movie id] </th><th
+style="text-align: center;"> year </th><th style="text-align: center;"> ave
+rating </th><th style="text-align: center;"> Act ion </th><th style="text-align:
+center;"> Adve nture </th><th style="text-align: center;"> Anim ation </th><th
+style="text-align: center;"> Chil dren </th><th style="text-align: center;"> Com
+edy </th><th style="text-align: center;"> Crime </th><th style="text-align:
+center;"> Docum entary </th><th style="text-align: center;"> Drama </th><th
+style="text-align: center;"> Fan tasy </th><th style="text-align: center;"> Hor
+ror </th><th style="text-align: center;"> Mys tery </th><th style="text-align:
+center;"> Rom ance </th><th style="text-align: center;"> Sci -Fi </th><th
+style="text-align: center;"> Thri ller </th></tr>\textbackslash{}n</thead>\textbackslash{}n<tbody>\textbackslash{}n<tr><td
+style="text-align: center;">    6874    </td><td style="text-align: center;">
+2003 </td><td style="text-align: center;">    4.0     </td><td style="text-
+align: center;">    1    </td><td style="text-align: center;">     0
+</td><td style="text-align: center;">     0      </td><td style="text-align:
+center;">     0     </td><td style="text-align: center;">    0    </td><td
+style="text-align: center;">   1   </td><td style="text-align: center;">      0
+</td><td style="text-align: center;">   0   </td><td style="text-align:
+center;">    0     </td><td style="text-align: center;">    0    </td><td
+style="text-align: center;">    0     </td><td style="text-align: center;">    0
+</td><td style="text-align: center;">    0    </td><td style="text-align:
+center;">     1     </td></tr>\textbackslash{}n<tr><td style="text-align: center;">    8798
+</td><td style="text-align: center;"> 2004 </td><td style="text-align: center;">
+3.8     </td><td style="text-align: center;">    1    </td><td style="text-
+align: center;">     0      </td><td style="text-align: center;">     0
+</td><td style="text-align: center;">     0     </td><td style="text-align:
+center;">    0    </td><td style="text-align: center;">   1   </td><td
+style="text-align: center;">      0       </td><td style="text-align: center;">
+1   </td><td style="text-align: center;">    0     </td><td style="text-align:
+center;">    0    </td><td style="text-align: center;">    0     </td><td
+style="text-align: center;">    0     </td><td style="text-align: center;">    0
+</td><td style="text-align: center;">     1     </td></tr>\textbackslash{}n<tr><td style="text-
+align: center;">   46970    </td><td style="text-align: center;"> 2006 </td><td
+style="text-align: center;">    3.2     </td><td style="text-align: center;">
+1    </td><td style="text-align: center;">     0      </td><td style="text-
+align: center;">     0      </td><td style="text-align: center;">     0
+</td><td style="text-align: center;">    1    </td><td style="text-align:
+center;">   0   </td><td style="text-align: center;">      0       </td><td
+style="text-align: center;">   0   </td><td style="text-align: center;">    0
+</td><td style="text-align: center;">    0    </td><td style="text-align:
+center;">    0     </td><td style="text-align: center;">    0     </td><td
+style="text-align: center;">    0    </td><td style="text-align: center;">     0
+</td></tr>\textbackslash{}n<tr><td style="text-align: center;">   48516    </td><td
+style="text-align: center;"> 2006 </td><td style="text-align: center;">    4.3
+</td><td style="text-align: center;">    0    </td><td style="text-align:
+center;">     0      </td><td style="text-align: center;">     0      </td><td
+style="text-align: center;">     0     </td><td style="text-align: center;">
+0    </td><td style="text-align: center;">   1   </td><td style="text-align:
+center;">      0       </td><td style="text-align: center;">   1   </td><td
+style="text-align: center;">    0     </td><td style="text-align: center;">    0
+</td><td style="text-align: center;">    0     </td><td style="text-align:
+center;">    0     </td><td style="text-align: center;">    0    </td><td
+style="text-align: center;">     1     </td></tr>\textbackslash{}n<tr><td style="text-align:
+center;">   58559    </td><td style="text-align: center;"> 2008 </td><td
+style="text-align: center;">    4.2     </td><td style="text-align: center;">
+1    </td><td style="text-align: center;">     0      </td><td style="text-
+align: center;">     0      </td><td style="text-align: center;">     0
+</td><td style="text-align: center;">    0    </td><td style="text-align:
+center;">   1   </td><td style="text-align: center;">      0       </td><td
+style="text-align: center;">   1   </td><td style="text-align: center;">    0
+</td><td style="text-align: center;">    0    </td><td style="text-align:
+center;">    0     </td><td style="text-align: center;">    0     </td><td
+style="text-align: center;">    0    </td><td style="text-align: center;">     0
+</td></tr>\textbackslash{}n</tbody>\textbackslash{}n</table>'
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Above, the movie array contains the year the film was released, the
+average rating and an indicator for each potential genre. The indicator
+is one for each genre that applies to the movie. The movie id is not
+used in training but is useful when interpreting the data.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y\PYZus{}train[:5]: }\PY{l+s+si}{\PYZob{}}\PY{n}{y\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+y\_train[:5]: [4.  3.5 4.  4.  4.5]
+    \end{Verbatim}
+
+    The target, y, is the movie rating given by the user.
+
+    Above, we can see that movie 6874 is an Action/Crime/Thriller movie
+released in 2003. User 2 rates action movies as 3.9 on average.
+MovieLens users gave the movie an average rating of 4. `y' is 4
+indicating user 2 rated movie 6874 as a 4 as well. A single training
+example consists of a row from both the user and item arrays and a
+rating from y\_train.
+
+    \#\#\# 3.2 Preparing the training data Recall in Course 1, Week 2, you
+explored feature scaling as a means of improving convergence. We'll
+scale the input features using the
+\href{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html}{scikit
+learn StandardScaler}. This was used in Course 1, Week 2, Lab 5. Below,
+the inverse\_transform is also shown to produce the original inputs.
+We'll scale the target ratings using a Min Max Scaler which scales the
+target to be between -1 and 1.
+\href{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html}{scikit
+learn MinMaxScaler}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} scale training data}
+\PY{n}{item\PYZus{}train\PYZus{}unscaled} \PY{o}{=} \PY{n}{item\PYZus{}train}
+\PY{n}{user\PYZus{}train\PYZus{}unscaled} \PY{o}{=} \PY{n}{user\PYZus{}train}
+\PY{n}{y\PYZus{}train\PYZus{}unscaled}    \PY{o}{=} \PY{n}{y\PYZus{}train}
+
+\PY{n}{scalerItem} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+\PY{n}{scalerItem}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{item\PYZus{}train}\PY{p}{)}
+\PY{n}{item\PYZus{}train} \PY{o}{=} \PY{n}{scalerItem}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{item\PYZus{}train}\PY{p}{)}
+
+\PY{n}{scalerUser} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+\PY{n}{scalerUser}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{user\PYZus{}train}\PY{p}{)}
+\PY{n}{user\PYZus{}train} \PY{o}{=} \PY{n}{scalerUser}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{user\PYZus{}train}\PY{p}{)}
+
+\PY{n}{scalerTarget} \PY{o}{=} \PY{n}{MinMaxScaler}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\PY{n}{scalerTarget}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{scalerTarget}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\PY{c+c1}{\PYZsh{}ynorm\PYZus{}test = scalerTarget.transform(y\PYZus{}test.reshape(\PYZhy{}1, 1))}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{allclose}\PY{p}{(}\PY{n}{item\PYZus{}train\PYZus{}unscaled}\PY{p}{,} \PY{n}{scalerItem}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{item\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{allclose}\PY{p}{(}\PY{n}{user\PYZus{}train\PYZus{}unscaled}\PY{p}{,} \PY{n}{scalerUser}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{user\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+True
+    \end{Verbatim}
+
+    To allow us to evaluate the results, we will split the data into
+training and test sets as was discussed in Course 2, Week 3. Here we
+will use
+\href{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html}{sklean
+train\_test\_split} to split and shuffle the data. Note that setting the
+initial random state to the same value ensures item, user, and y are
+shuffled identically.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{item\PYZus{}train}\PY{p}{,} \PY{n}{item\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{item\PYZus{}train}\PY{p}{,} \PY{n}{train\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.80}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{user\PYZus{}train}\PY{p}{,} \PY{n}{user\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{user\PYZus{}train}\PY{p}{,} \PY{n}{train\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.80}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}       \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,}    \PY{n}{train\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.80}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movie/item training data shape: }\PY{l+s+si}{\PYZob{}}\PY{n}{item\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movie/item test data shape: }\PY{l+s+si}{\PYZob{}}\PY{n}{item\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+movie/item training data shape: (40707, 17)
+movie/item test data shape: (10177, 17)
+    \end{Verbatim}
+
+    The scaled, shuffled data now has a mean of zero.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{pprint\PYZus{}train}\PY{p}{(}\PY{n}{user\PYZus{}train}\PY{p}{,} \PY{n}{user\PYZus{}features}\PY{p}{,} \PY{n}{uvs}\PY{p}{,} \PY{n}{u\PYZus{}s}\PY{p}{,} \PY{n}{maxcount}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+'<table>\textbackslash{}n<thead>\textbackslash{}n<tr><th style="text-align: center;"> [user id] </th><th
+style="text-align: center;"> [rating count] </th><th style="text-align:
+center;"> [rating ave] </th><th style="text-align: center;"> Act ion </th><th
+style="text-align: center;"> Adve nture </th><th style="text-align: center;">
+Anim ation </th><th style="text-align: center;"> Chil dren </th><th style="text-
+align: center;"> Com edy </th><th style="text-align: center;"> Crime </th><th
+style="text-align: center;"> Docum entary </th><th style="text-align: center;">
+Drama </th><th style="text-align: center;"> Fan tasy </th><th style="text-align:
+center;"> Hor ror </th><th style="text-align: center;"> Mys tery </th><th
+style="text-align: center;"> Rom ance </th><th style="text-align: center;"> Sci
+-Fi </th><th style="text-align: center;"> Thri ller
+</th></tr>\textbackslash{}n</thead>\textbackslash{}n<tbody>\textbackslash{}n<tr><td style="text-align: center;">     1
+</td><td style="text-align: center;">       0        </td><td style="text-align:
+center;">     -1.0     </td><td style="text-align: center;">  -0.8   </td><td
+style="text-align: center;">    -0.7    </td><td style="text-align: center;">
+0.1     </td><td style="text-align: center;">   -0.0    </td><td style="text-
+align: center;">  -1.2   </td><td style="text-align: center;"> -0.4  </td><td
+style="text-align: center;">     0.6      </td><td style="text-align: center;">
+-0.5  </td><td style="text-align: center;">   -0.5   </td><td style="text-align:
+center;">  -0.1   </td><td style="text-align: center;">   -0.6   </td><td
+style="text-align: center;">   -0.6   </td><td style="text-align: center;">
+-0.7   </td><td style="text-align: center;">   -0.7    </td></tr>\textbackslash{}n<tr><td
+style="text-align: center;">     0     </td><td style="text-align: center;">
+1        </td><td style="text-align: center;">     -0.7     </td><td
+style="text-align: center;">  -0.5   </td><td style="text-align: center;">
+-0.7    </td><td style="text-align: center;">    -0.1    </td><td style="text-
+align: center;">   -0.2    </td><td style="text-align: center;">  -0.6
+</td><td style="text-align: center;"> -0.2  </td><td style="text-align:
+center;">     0.7      </td><td style="text-align: center;"> -0.5  </td><td
+style="text-align: center;">   -0.8   </td><td style="text-align: center;">
+0.1   </td><td style="text-align: center;">   -0.0   </td><td style="text-align:
+center;">   -0.6   </td><td style="text-align: center;">  -0.5   </td><td
+style="text-align: center;">   -0.4    </td></tr>\textbackslash{}n<tr><td style="text-align:
+center;">    -1     </td><td style="text-align: center;">       -1
+</td><td style="text-align: center;">     -0.2     </td><td style="text-align:
+center;">   0.3   </td><td style="text-align: center;">    -0.4    </td><td
+style="text-align: center;">    0.4     </td><td style="text-align: center;">
+0.5    </td><td style="text-align: center;">   1.0   </td><td style="text-align:
+center;">  0.6  </td><td style="text-align: center;">     -1.2     </td><td
+style="text-align: center;"> -0.3  </td><td style="text-align: center;">   -0.6
+</td><td style="text-align: center;">  -2.3   </td><td style="text-align:
+center;">   -0.1   </td><td style="text-align: center;">   0.0    </td><td
+style="text-align: center;">   0.4   </td><td style="text-align: center;">
+-0.0    </td></tr>\textbackslash{}n<tr><td style="text-align: center;">     0     </td><td
+style="text-align: center;">       -1       </td><td style="text-align:
+center;">     0.6      </td><td style="text-align: center;">   0.5   </td><td
+style="text-align: center;">    0.5     </td><td style="text-align: center;">
+0.2     </td><td style="text-align: center;">    0.6    </td><td style="text-
+align: center;">  -0.1   </td><td style="text-align: center;">  0.5  </td><td
+style="text-align: center;">     -1.2     </td><td style="text-align: center;">
+0.9  </td><td style="text-align: center;">   1.2    </td><td style="text-align:
+center;">  -2.3   </td><td style="text-align: center;">   -0.1   </td><td
+style="text-align: center;">   0.0    </td><td style="text-align: center;">
+0.2   </td><td style="text-align: center;">    0.3    </td></tr>\textbackslash{}n<tr><td
+style="text-align: center;">    -1     </td><td style="text-align: center;">
+0        </td><td style="text-align: center;">     0.7      </td><td
+style="text-align: center;">   0.6   </td><td style="text-align: center;">
+0.5     </td><td style="text-align: center;">    0.3     </td><td style="text-
+align: center;">    0.5    </td><td style="text-align: center;">   0.4
+</td><td style="text-align: center;">  0.6  </td><td style="text-align:
+center;">     1.0      </td><td style="text-align: center;">  0.6  </td><td
+style="text-align: center;">   0.3    </td><td style="text-align: center;">
+0.8   </td><td style="text-align: center;">   0.8    </td><td style="text-align:
+center;">   0.4    </td><td style="text-align: center;">   0.7   </td><td
+style="text-align: center;">    0.7    </td></tr>\textbackslash{}n</tbody>\textbackslash{}n</table>'
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \#\# 4 - Neural Network for content-based filtering Now, let's construct
+a neural network as described in the figure above. It will have two
+networks that are combined by a dot product. You will construct the two
+networks. In this example, they will be identical. Note that these
+networks do not need to be the same. If the user content was
+substantially larger than the movie content, you might elect to increase
+the complexity of the user network relative to the movie network. In
+this case, the content is similar, so the networks are the same.
+
+\#\#\# Exercise 1
+
+\begin{itemize}
+\tightlist
+\item
+  Use a Keras sequential model
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The first layer is a dense layer with 256 units and a relu
+    activation.
+  \item
+    The second layer is a dense layer with 128 units and a relu
+    activation.
+  \item
+    The third layer is a dense layer with \texttt{num\_outputs} units
+    and a linear or no activation.
+  \end{itemize}
+\end{itemize}
+
+The remainder of the network will be provided. The provided code does
+not use the Keras sequential model but instead uses the Keras
+\href{https://keras.io/guides/functional_api/}{functional api}. This
+format allows for more flexibility in how components are interconnected.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} GRADED\PYZus{}CELL}
+\PY{c+c1}{\PYZsh{} UNQ\PYZus{}C1}
+
+\PY{n}{num\PYZus{}outputs} \PY{o}{=} \PY{l+m+mi}{32}
+\PY{n}{tf}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{set\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{user\PYZus{}NN} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{models}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}\PY{p}{[}
+    \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}     }
+    \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+    \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+    \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{n}{num\PYZus{}outputs}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+  
+    \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}  }
+\PY{p}{]}\PY{p}{)}
+
+\PY{n}{item\PYZus{}NN} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{models}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}\PY{p}{[}
+    \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}     }
+      \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+    \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+    \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{n}{num\PYZus{}outputs}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+  
+  
+    \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}  }
+\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} create the user input and point to the base network}
+\PY{n}{input\PYZus{}user} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{num\PYZus{}user\PYZus{}features}\PY{p}{)}\PY{p}{)}
+\PY{n}{vu} \PY{o}{=} \PY{n}{user\PYZus{}NN}\PY{p}{(}\PY{n}{input\PYZus{}user}\PY{p}{)}
+\PY{n}{vu} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{l2\PYZus{}normalize}\PY{p}{(}\PY{n}{vu}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} create the item input and point to the base network}
+\PY{n}{input\PYZus{}item} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{num\PYZus{}item\PYZus{}features}\PY{p}{)}\PY{p}{)}
+\PY{n}{vm} \PY{o}{=} \PY{n}{item\PYZus{}NN}\PY{p}{(}\PY{n}{input\PYZus{}item}\PY{p}{)}
+\PY{n}{vm} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{l2\PYZus{}normalize}\PY{p}{(}\PY{n}{vm}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} compute the dot product of the two vectors vu and vm}
+\PY{n}{output} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Dot}\PY{p}{(}\PY{n}{axes}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{(}\PY{p}{[}\PY{n}{vu}\PY{p}{,} \PY{n}{vm}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} specify the inputs and output of the model}
+\PY{n}{model} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{Model}\PY{p}{(}\PY{p}{[}\PY{n}{input\PYZus{}user}\PY{p}{,} \PY{n}{input\PYZus{}item}\PY{p}{]}\PY{p}{,} \PY{n}{output}\PY{p}{)}
+
+\PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model: "model"
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                    Output Shape         Param \#     Connected to
+================================================================================
+==================
+input\_1 (InputLayer)            [(None, 14)]         0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+input\_2 (InputLayer)            [(None, 16)]         0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+sequential (Sequential)         (None, 32)           40864       input\_1[0][0]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+sequential\_1 (Sequential)       (None, 32)           41376       input\_2[0][0]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize/Square [(None, 32)]         0
+sequential[0][0]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_1/Squa [(None, 32)]         0
+sequential\_1[0][0]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize/Sum (T [(None, 1)]          0
+tf\_op\_layer\_l2\_normalize/Square[0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_1/Sum  [(None, 1)]          0
+tf\_op\_layer\_l2\_normalize\_1/Square
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize/Maximu [(None, 1)]          0
+tf\_op\_layer\_l2\_normalize/Sum[0][0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_1/Maxi [(None, 1)]          0
+tf\_op\_layer\_l2\_normalize\_1/Sum[0]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize/Rsqrt  [(None, 1)]          0
+tf\_op\_layer\_l2\_normalize/Maximum[
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_1/Rsqr [(None, 1)]          0
+tf\_op\_layer\_l2\_normalize\_1/Maximu
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize (Tenso [(None, 32)]         0
+sequential[0][0]
+tf\_op\_layer\_l2\_normalize/Rsqrt[0]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_1 (Ten [(None, 32)]         0
+sequential\_1[0][0]
+tf\_op\_layer\_l2\_normalize\_1/Rsqrt[
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dot (Dot)                       (None, 1)            0
+tf\_op\_layer\_l2\_normalize[0][0]
+tf\_op\_layer\_l2\_normalize\_1[0][0]
+================================================================================
+==================
+Total params: 82,240
+Trainable params: 82,240
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Public tests}
+\PY{k+kn}{from} \PY{n+nn}{public\PYZus{}tests} \PY{k+kn}{import} \PY{o}{*}
+\PY{n}{test\PYZus{}tower}\PY{p}{(}\PY{n}{user\PYZus{}NN}\PY{p}{)}
+\PY{n}{test\PYZus{}tower}\PY{p}{(}\PY{n}{item\PYZus{}NN}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{ansi-green-intense}{All tests passed!
+}\textcolor{ansi-green-intense}{All tests passed!}
+    \end{Verbatim}
+
+    Click for hints
+
+You can create a dense layer with a relu activation as shown.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{user\_NN }\OperatorTok{=}\NormalTok{ tf.keras.models.Sequential([}
+    \CommentTok{\#\#\# START CODE HERE }\AlertTok{\#\#\#}\CommentTok{     }
+\NormalTok{  tf.keras.layers.Dense(}\DecValTok{256}\NormalTok{, activation}\OperatorTok{=}\StringTok{\textquotesingle{}relu\textquotesingle{}}\NormalTok{),}
+
+    
+    \CommentTok{\#\#\# }\RegionMarkerTok{END}\CommentTok{ CODE HERE }\AlertTok{\#\#\#}\CommentTok{  }
+\NormalTok{])}
+
+\NormalTok{item\_NN }\OperatorTok{=}\NormalTok{ tf.keras.models.Sequential([}
+    \CommentTok{\#\#\# START CODE HERE }\AlertTok{\#\#\#}\CommentTok{     }
+\NormalTok{  tf.keras.layers.Dense(}\DecValTok{256}\NormalTok{, activation}\OperatorTok{=}\StringTok{\textquotesingle{}relu\textquotesingle{}}\NormalTok{),}
+
+    
+    \CommentTok{\#\#\# }\RegionMarkerTok{END}\CommentTok{ CODE HERE }\AlertTok{\#\#\#}\CommentTok{  }
+\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+Click for solution
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{user\_NN }\OperatorTok{=}\NormalTok{ tf.keras.models.Sequential([}
+    \CommentTok{\#\#\# START CODE HERE }\AlertTok{\#\#\#}\CommentTok{     }
+\NormalTok{  tf.keras.layers.Dense(}\DecValTok{256}\NormalTok{, activation}\OperatorTok{=}\StringTok{\textquotesingle{}relu\textquotesingle{}}\NormalTok{),}
+\NormalTok{  tf.keras.layers.Dense(}\DecValTok{128}\NormalTok{, activation}\OperatorTok{=}\StringTok{\textquotesingle{}relu\textquotesingle{}}\NormalTok{),}
+\NormalTok{  tf.keras.layers.Dense(num\_outputs),}
+    \CommentTok{\#\#\# }\RegionMarkerTok{END}\CommentTok{ CODE HERE }\AlertTok{\#\#\#}\CommentTok{  }
+\NormalTok{])}
+
+\NormalTok{item\_NN }\OperatorTok{=}\NormalTok{ tf.keras.models.Sequential([}
+    \CommentTok{\#\#\# START CODE HERE }\AlertTok{\#\#\#}\CommentTok{     }
+\NormalTok{  tf.keras.layers.Dense(}\DecValTok{256}\NormalTok{, activation}\OperatorTok{=}\StringTok{\textquotesingle{}relu\textquotesingle{}}\NormalTok{),}
+\NormalTok{  tf.keras.layers.Dense(}\DecValTok{128}\NormalTok{, activation}\OperatorTok{=}\StringTok{\textquotesingle{}relu\textquotesingle{}}\NormalTok{),}
+\NormalTok{  tf.keras.layers.Dense(num\_outputs),}
+    \CommentTok{\#\#\# }\RegionMarkerTok{END}\CommentTok{ CODE HERE }\AlertTok{\#\#\#}\CommentTok{  }
+\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+    We will use a mean squared error loss and an Adam optimizer.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{tf}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{set\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{cost\PYZus{}fn} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{losses}\PY{o}{.}\PY{n}{MeanSquaredError}\PY{p}{(}\PY{p}{)}
+\PY{n}{opt} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+\PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{n}{opt}\PY{p}{,}
+              \PY{n}{loss}\PY{o}{=}\PY{n}{cost\PYZus{}fn}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{tf}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{set\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{[}\PY{n}{user\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{u\PYZus{}s}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{item\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i\PYZus{}s}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train on 40707 samples
+Epoch 1/30
+40707/40707 [==============================] - 5s 123us/sample - loss: 0.1232
+Epoch 2/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.1146
+Epoch 3/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.1089
+Epoch 4/30
+40707/40707 [==============================] - 5s 112us/sample - loss: 0.1039
+Epoch 5/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.1001
+Epoch 6/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.0973
+Epoch 7/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.0956
+Epoch 8/30
+40707/40707 [==============================] - 5s 112us/sample - loss: 0.0935
+Epoch 9/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.0916
+Epoch 10/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.0897
+Epoch 11/30
+40707/40707 [==============================] - 5s 112us/sample - loss: 0.0880
+Epoch 12/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.0865
+Epoch 13/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.0852
+Epoch 14/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.0839
+Epoch 15/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.0830
+Epoch 16/30
+40707/40707 [==============================] - 5s 115us/sample - loss: 0.0815
+Epoch 17/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.0807
+Epoch 18/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.0796
+Epoch 19/30
+40707/40707 [==============================] - 5s 112us/sample - loss: 0.0786
+Epoch 20/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.0776
+Epoch 21/30
+40707/40707 [==============================] - 5s 114us/sample - loss: 0.0769
+Epoch 22/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.0761
+Epoch 23/30
+40707/40707 [==============================] - 5s 112us/sample - loss: 0.0755
+Epoch 24/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.0746
+Epoch 25/30
+40707/40707 [==============================] - 5s 113us/sample - loss: 0.0741
+Epoch 26/30
+40707/40707 [==============================] - 5s 112us/sample - loss: 0.0733
+Epoch 27/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.0728
+Epoch 28/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.0723
+Epoch 29/30
+40707/40707 [==============================] - 5s 111us/sample - loss: 0.0717
+Epoch 30/30
+40707/40707 [==============================] - 5s 112us/sample - loss: 0.0713
+    \end{Verbatim}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<tensorflow.python.keras.callbacks.History at 0x77baffc3d550>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Evaluate the model to determine loss on the test data.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{model}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{[}\PY{n}{user\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{u\PYZus{}s}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{item\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i\PYZus{}s}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10177/10177 [==============================] - 0s 35us/sample - loss: 0.0815
+    \end{Verbatim}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+0.08146006993124337
+\end{Verbatim}
+\end{tcolorbox}
+        
+    It is comparable to the training loss indicating the model has not
+substantially overfit the training data.
+
+    \#\# 5 - Predictions Below, you'll use your model to make predictions in
+a number of circumstances. \#\#\# 5.1 - Predictions for a new user
+First, we'll create a new user and have the model suggest movies for
+that user. After you have tried this on the example user content, feel
+free to change the user content to match your own preferences and see
+what the model suggests. Note that ratings are between 0.5 and 5.0,
+inclusive, in half-step increments.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{new\PYZus{}user\PYZus{}id} \PY{o}{=} \PY{l+m+mi}{5000}
+\PY{n}{new\PYZus{}rating\PYZus{}ave} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}action} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}adventure} \PY{o}{=} \PY{l+m+mf}{5.0}
+\PY{n}{new\PYZus{}animation} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}childrens} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}comedy} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}crime} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}documentary} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}drama} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}fantasy} \PY{o}{=} \PY{l+m+mf}{5.0}
+\PY{n}{new\PYZus{}horror} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}mystery} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}romance} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}scifi} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}thriller} \PY{o}{=} \PY{l+m+mf}{0.0}
+\PY{n}{new\PYZus{}rating\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{3}
+
+\PY{n}{user\PYZus{}vec} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{new\PYZus{}user\PYZus{}id}\PY{p}{,} \PY{n}{new\PYZus{}rating\PYZus{}count}\PY{p}{,} \PY{n}{new\PYZus{}rating\PYZus{}ave}\PY{p}{,}
+                      \PY{n}{new\PYZus{}action}\PY{p}{,} \PY{n}{new\PYZus{}adventure}\PY{p}{,} \PY{n}{new\PYZus{}animation}\PY{p}{,} \PY{n}{new\PYZus{}childrens}\PY{p}{,}
+                      \PY{n}{new\PYZus{}comedy}\PY{p}{,} \PY{n}{new\PYZus{}crime}\PY{p}{,} \PY{n}{new\PYZus{}documentary}\PY{p}{,}
+                      \PY{n}{new\PYZus{}drama}\PY{p}{,} \PY{n}{new\PYZus{}fantasy}\PY{p}{,} \PY{n}{new\PYZus{}horror}\PY{p}{,} \PY{n}{new\PYZus{}mystery}\PY{p}{,}
+                      \PY{n}{new\PYZus{}romance}\PY{p}{,} \PY{n}{new\PYZus{}scifi}\PY{p}{,} \PY{n}{new\PYZus{}thriller}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    The new user enjoys movies from the adventure, fantasy genres. Let's
+find the top-rated movies for the new user.\\
+Below, we'll use a set of movie/item vectors, \texttt{item\_vecs} that
+have a vector for each movie in the training/test set. This is matched
+with the new user vector above and the scaled vectors are used to
+predict ratings for all the movies.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} generate and replicate the user vector to match the number movies in the data set.}
+\PY{n}{user\PYZus{}vecs} \PY{o}{=} \PY{n}{gen\PYZus{}user\PYZus{}vecs}\PY{p}{(}\PY{n}{user\PYZus{}vec}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{item\PYZus{}vecs}\PY{p}{)}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} scale our user and item vectors}
+\PY{n}{suser\PYZus{}vecs} \PY{o}{=} \PY{n}{scalerUser}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{user\PYZus{}vecs}\PY{p}{)}
+\PY{n}{sitem\PYZus{}vecs} \PY{o}{=} \PY{n}{scalerItem}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{item\PYZus{}vecs}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} make a prediction}
+\PY{n}{y\PYZus{}p} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{p}{[}\PY{n}{suser\PYZus{}vecs}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{u\PYZus{}s}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{sitem\PYZus{}vecs}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i\PYZus{}s}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} unscale y prediction }
+\PY{n}{y\PYZus{}pu} \PY{o}{=} \PY{n}{scalerTarget}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{y\PYZus{}p}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} sort the results, highest prediction first}
+\PY{n}{sorted\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}pu}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{}negate to get largest rating first}
+\PY{n}{sorted\PYZus{}ypu}   \PY{o}{=} \PY{n}{y\PYZus{}pu}\PY{p}{[}\PY{n}{sorted\PYZus{}index}\PY{p}{]}
+\PY{n}{sorted\PYZus{}items} \PY{o}{=} \PY{n}{item\PYZus{}vecs}\PY{p}{[}\PY{n}{sorted\PYZus{}index}\PY{p}{]}  \PY{c+c1}{\PYZsh{}using unscaled vectors for display}
+
+\PY{n}{print\PYZus{}pred\PYZus{}movies}\PY{p}{(}\PY{n}{sorted\PYZus{}ypu}\PY{p}{,} \PY{n}{sorted\PYZus{}items}\PY{p}{,} \PY{n}{movie\PYZus{}dict}\PY{p}{,} \PY{n}{maxcount} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+'<table>\textbackslash{}n<thead>\textbackslash{}n<tr><th style="text-align: right;">  y\_p</th><th style="text-
+align: right;">  movie id</th><th style="text-align: right;">  rating
+ave</th><th>title                                              </th><th>genres
+</th></tr>\textbackslash{}n</thead>\textbackslash{}n<tbody>\textbackslash{}n<tr><td style="text-align: right;">  4.5</td><td
+style="text-align: right;">     98809</td><td style="text-align: right;">
+3.8</td><td>Hobbit: An Unexpected Journey, The (2012)
+</td><td>Adventure|Fantasy               </td></tr>\textbackslash{}n<tr><td style="text-align:
+right;">  4.4</td><td style="text-align: right;">      8368</td><td style="text-
+align: right;">         3.9</td><td>Harry Potter and the Prisoner of Azkaban
+(2004)    </td><td>Adventure|Fantasy               </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.4</td><td style="text-align: right;">
+54001</td><td style="text-align: right;">         3.9</td><td>Harry Potter and
+the Order of the Phoenix (2007)   </td><td>Adventure|Drama|Fantasy
+</td></tr>\textbackslash{}n<tr><td style="text-align: right;">  4.3</td><td style="text-align:
+right;">     40815</td><td style="text-align: right;">         3.8</td><td>Harry
+Potter and the Goblet of Fire (2005)         </td><td>Adventure|Fantasy|Thriller
+</td></tr>\textbackslash{}n<tr><td style="text-align: right;">  4.3</td><td style="text-align:
+right;">    106489</td><td style="text-align: right;">
+3.6</td><td>Hobbit: The Desolation of Smaug, The (2013)
+</td><td>Adventure|Fantasy               </td></tr>\textbackslash{}n<tr><td style="text-align:
+right;">  4.3</td><td style="text-align: right;">     81834</td><td style="text-
+align: right;">         4  </td><td>Harry Potter and the Deathly Hallows: Part 1
+(2010)</td><td>Action|Adventure|Fantasy        </td></tr>\textbackslash{}n<tr><td style="text-
+align: right;">  4.3</td><td style="text-align: right;">     59387</td><td
+style="text-align: right;">         4  </td><td>Fall, The (2006)
+</td><td>Adventure|Drama|Fantasy         </td></tr>\textbackslash{}n<tr><td style="text-align:
+right;">  4.3</td><td style="text-align: right;">      5952</td><td style="text-
+align: right;">         4  </td><td>Lord of the Rings: The Two Towers, The
+(2002)      </td><td>Adventure|Fantasy               </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.3</td><td style="text-align: right;">
+5816</td><td style="text-align: right;">         3.6</td><td>Harry Potter and
+the Chamber of Secrets (2002)     </td><td>Adventure|Fantasy
+</td></tr>\textbackslash{}n<tr><td style="text-align: right;">  4.3</td><td style="text-align:
+right;">     54259</td><td style="text-align: right;">
+3.6</td><td>Stardust (2007)
+</td><td>Adventure|Comedy|Fantasy|Romance</td></tr>\textbackslash{}n</tbody>\textbackslash{}n</table>'
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \#\#\# 5.2 - Predictions for an existing user. Let's look at the
+predictions for ``user 2'', one of the users in the data set. We can
+compare the predicted ratings with the model's ratings.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{uid} \PY{o}{=} \PY{l+m+mi}{2} 
+\PY{c+c1}{\PYZsh{} form a set of user vectors. This is the same vector, transformed and repeated.}
+\PY{n}{user\PYZus{}vecs}\PY{p}{,} \PY{n}{y\PYZus{}vecs} \PY{o}{=} \PY{n}{get\PYZus{}user\PYZus{}vecs}\PY{p}{(}\PY{n}{uid}\PY{p}{,} \PY{n}{user\PYZus{}train\PYZus{}unscaled}\PY{p}{,} \PY{n}{item\PYZus{}vecs}\PY{p}{,} \PY{n}{user\PYZus{}to\PYZus{}genre}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} scale our user and item vectors}
+\PY{n}{suser\PYZus{}vecs} \PY{o}{=} \PY{n}{scalerUser}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{user\PYZus{}vecs}\PY{p}{)}
+\PY{n}{sitem\PYZus{}vecs} \PY{o}{=} \PY{n}{scalerItem}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{item\PYZus{}vecs}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} make a prediction}
+\PY{n}{y\PYZus{}p} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{p}{[}\PY{n}{suser\PYZus{}vecs}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{u\PYZus{}s}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{sitem\PYZus{}vecs}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i\PYZus{}s}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} unscale y prediction }
+\PY{n}{y\PYZus{}pu} \PY{o}{=} \PY{n}{scalerTarget}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{y\PYZus{}p}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} sort the results, highest prediction first}
+\PY{n}{sorted\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}pu}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{}negate to get largest rating first}
+\PY{n}{sorted\PYZus{}ypu}   \PY{o}{=} \PY{n}{y\PYZus{}pu}\PY{p}{[}\PY{n}{sorted\PYZus{}index}\PY{p}{]}
+\PY{n}{sorted\PYZus{}items} \PY{o}{=} \PY{n}{item\PYZus{}vecs}\PY{p}{[}\PY{n}{sorted\PYZus{}index}\PY{p}{]}  \PY{c+c1}{\PYZsh{}using unscaled vectors for display}
+\PY{n}{sorted\PYZus{}user}  \PY{o}{=} \PY{n}{user\PYZus{}vecs}\PY{p}{[}\PY{n}{sorted\PYZus{}index}\PY{p}{]}
+\PY{n}{sorted\PYZus{}y}     \PY{o}{=} \PY{n}{y\PYZus{}vecs}\PY{p}{[}\PY{n}{sorted\PYZus{}index}\PY{p}{]}
+
+\PY{c+c1}{\PYZsh{}print sorted predictions for movies rated by the user}
+\PY{n}{print\PYZus{}existing\PYZus{}user}\PY{p}{(}\PY{n}{sorted\PYZus{}ypu}\PY{p}{,} \PY{n}{sorted\PYZus{}y}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{sorted\PYZus{}user}\PY{p}{,} \PY{n}{sorted\PYZus{}items}\PY{p}{,} \PY{n}{ivs}\PY{p}{,} \PY{n}{uvs}\PY{p}{,} \PY{n}{movie\PYZus{}dict}\PY{p}{,} \PY{n}{maxcount} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+'<table>\textbackslash{}n<thead>\textbackslash{}n<tr><th style="text-align: right;">  y\_p</th><th style="text-
+align: right;">  y</th><th style="text-align: right;">  user</th><th>user genre
+ave           </th><th style="text-align: right;">  movie rating ave</th><th
+style="text-align: right;">  movie id</th><th>title
+</th><th>genres
+</th></tr>\textbackslash{}n</thead>\textbackslash{}n<tbody>\textbackslash{}n<tr><td style="text-align: right;">  4.5</td><td
+style="text-align: right;">5.0</td><td style="text-align: right;">
+2</td><td>[4.0]                    </td><td style="text-align: right;">
+4.3</td><td style="text-align: right;">     80906</td><td>Inside Job (2010)
+</td><td>Documentary                               </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.2</td><td style="text-align: right;">3.5</td><td
+style="text-align: right;">     2</td><td>[4.0,4.0]                </td><td
+style="text-align: right;">               3.9</td><td style="text-align:
+right;">     99114</td><td>Django Unchained (2012)
+</td><td>Action|Drama                              </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.1</td><td style="text-align: right;">4.5</td><td
+style="text-align: right;">     2</td><td>[4.0,4.0]                </td><td
+style="text-align: right;">               4.1</td><td style="text-align:
+right;">     68157</td><td>Inglourious Basterds (2009)
+</td><td>Action|Drama                              </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.1</td><td style="text-align: right;">3.5</td><td
+style="text-align: right;">     2</td><td>[4.0,3.9,3.9]            </td><td
+style="text-align: right;">               3.9</td><td style="text-align:
+right;">    115713</td><td>Ex Machina (2015)
+</td><td>Drama|Sci-Fi|Thriller                     </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.0</td><td style="text-align: right;">4.0</td><td
+style="text-align: right;">     2</td><td>[4.0,4.1,4.0,4.0,3.9,3.9]</td><td
+style="text-align: right;">               4.1</td><td style="text-align:
+right;">     79132</td><td>Inception (2010)
+</td><td>Action|Crime|Drama|Mystery|Sci-Fi|Thriller</td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.0</td><td style="text-align: right;">4.0</td><td
+style="text-align: right;">     2</td><td>[4.1,4.0,3.9]            </td><td
+style="text-align: right;">               4.3</td><td style="text-align:
+right;">     48516</td><td>Departed, The (2006)
+</td><td>Crime|Drama|Thriller                      </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.0</td><td style="text-align: right;">4.5</td><td
+style="text-align: right;">     2</td><td>[4.0,4.1,4.0]            </td><td
+style="text-align: right;">               4.2</td><td style="text-align:
+right;">     58559</td><td>Dark Knight, The (2008)
+</td><td>Action|Crime|Drama                        </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.0</td><td style="text-align: right;">4.0</td><td
+style="text-align: right;">     2</td><td>[4.0,4.1,3.9]            </td><td
+style="text-align: right;">               4.0</td><td style="text-align:
+right;">      6874</td><td>Kill Bill: Vol. 1 (2003)
+</td><td>Action|Crime|Thriller                     </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  4.0</td><td style="text-align: right;">3.5</td><td
+style="text-align: right;">     2</td><td>[4.0,4.1,4.0,3.9]        </td><td
+style="text-align: right;">               3.8</td><td style="text-align:
+right;">      8798</td><td>Collateral (2004)
+</td><td>Action|Crime|Drama|Thriller               </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.9</td><td style="text-align: right;">5.0</td><td
+style="text-align: right;">     2</td><td>[4.0,4.1,4.0]            </td><td
+style="text-align: right;">               3.9</td><td style="text-align:
+right;">    106782</td><td>Wolf of Wall Street, The (2013)
+</td><td>Comedy|Crime|Drama                        </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.9</td><td style="text-align: right;">3.5</td><td
+style="text-align: right;">     2</td><td>[4.0,4.2,4.1]            </td><td
+style="text-align: right;">               4.0</td><td style="text-align:
+right;">     91529</td><td>Dark Knight Rises, The (2012)
+</td><td>Action|Adventure|Crime                    </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.9</td><td style="text-align: right;">4.0</td><td
+style="text-align: right;">     2</td><td>[4.0,4.0,3.9]            </td><td
+style="text-align: right;">               4.0</td><td style="text-align:
+right;">     74458</td><td>Shutter Island (2010)
+</td><td>Drama|Mystery|Thriller                    </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.9</td><td style="text-align: right;">4.5</td><td
+style="text-align: right;">     2</td><td>[4.1,4.0,3.9]            </td><td
+style="text-align: right;">               4.0</td><td style="text-align:
+right;">     80489</td><td>Town, The (2010)
+</td><td>Crime|Drama|Thriller                      </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.8</td><td style="text-align: right;">4.0</td><td
+style="text-align: right;">     2</td><td>[4.0]                    </td><td
+style="text-align: right;">               4.0</td><td style="text-align:
+right;">    112552</td><td>Whiplash (2014)
+</td><td>Drama                                     </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.8</td><td style="text-align: right;">3.0</td><td
+style="text-align: right;">     2</td><td>[3.9]                    </td><td
+style="text-align: right;">               4.0</td><td style="text-align:
+right;">    109487</td><td>Interstellar (2014)
+</td><td>Sci-Fi                                    </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.8</td><td style="text-align: right;">5.0</td><td
+style="text-align: right;">     2</td><td>[4.0]                    </td><td
+style="text-align: right;">               3.7</td><td style="text-align:
+right;">     89774</td><td>Warrior (2011)
+</td><td>Drama                                     </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.7</td><td style="text-align: right;">3.0</td><td
+style="text-align: right;">     2</td><td>[4.0,4.0,3.0]            </td><td
+style="text-align: right;">               3.9</td><td style="text-align:
+right;">     71535</td><td>Zombieland (2009)
+</td><td>Action|Comedy|Horror                      </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.7</td><td style="text-align: right;">5.0</td><td
+style="text-align: right;">     2</td><td>[4.0,4.2,3.9,3.9]        </td><td
+style="text-align: right;">               3.8</td><td style="text-align:
+right;">    122882</td><td>Mad Max: Fury Road (2015)
+</td><td>Action|Adventure|Sci-Fi|Thriller          </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.5</td><td style="text-align: right;">5.0</td><td
+style="text-align: right;">     2</td><td>[4.0]                    </td><td
+style="text-align: right;">               3.6</td><td style="text-align:
+right;">     60756</td><td>Step Brothers (2008)
+</td><td>Comedy                                    </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.5</td><td style="text-align: right;">2.5</td><td
+style="text-align: right;">     2</td><td>[4.0,3.9]                </td><td
+style="text-align: right;">               3.5</td><td style="text-align:
+right;">     91658</td><td>Girl with the Dragon Tattoo, The (2011)
+</td><td>Drama|Thriller                            </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.1</td><td style="text-align: right;">3.0</td><td
+style="text-align: right;">     2</td><td>[4.0,4.0]                </td><td
+style="text-align: right;">               4.0</td><td style="text-align:
+right;">     77455</td><td>Exit Through the Gift Shop (2010)
+</td><td>Comedy|Documentary                        </td></tr>\textbackslash{}n<tr><td
+style="text-align: right;">  3.1</td><td style="text-align: right;">4.0</td><td
+style="text-align: right;">     2</td><td>[4.0,4.0]                </td><td
+style="text-align: right;">               3.2</td><td style="text-align:
+right;">     46970</td><td>Talladega Nights: The Ballad of Ricky Bobby
+(2006)</td><td>Action|Comedy
+</td></tr>\textbackslash{}n</tbody>\textbackslash{}n</table>'
+\end{Verbatim}
+\end{tcolorbox}
+        
+    The model prediction is generally within 1 of the actual rating though
+it is not a very accurate predictor of how a user rates specific movies.
+This is especially true if the user rating is significantly different
+than the user's genre average. You can vary the user id above to try
+different users. Not all user id's were used in the training set.
+
+    \#\#\# 5.3 - Finding Similar Items The neural network above produces two
+feature vectors, a user feature vector \(v_u\), and a movie feature
+vector, \(v_m\). These are 32 entry vectors whose values are difficult
+to interpret. However, similar items will have similar vectors. This
+information can be used to make recommendations. For example, if a user
+has rated ``Toy Story 3'' highly, one could recommend similar movies by
+selecting movies with similar movie feature vectors.
+
+A similarity measure is the squared distance between the two vectors \$
+\mathbf{v_m^{(k)}}\$ and \(\mathbf{v_m^{(i)}}\) :
+\[\left\Vert \mathbf{v_m^{(k)}} - \mathbf{v_m^{(i)}}  \right\Vert^2 = \sum_{l=1}^{n}(v_{m_l}^{(k)} - v_{m_l}^{(i)})^2\tag{1}\]
+
+    \#\#\# Exercise 2
+
+Write a function to compute the square distance.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} GRADED\PYZus{}FUNCTION: sq\PYZus{}dist}
+\PY{c+c1}{\PYZsh{} UNQ\PYZus{}C2}
+\PY{k}{def} \PY{n+nf}{sq\PYZus{}dist}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    Returns the squared distance between two vectors}
+\PY{l+s+sd}{    Args:}
+\PY{l+s+sd}{      a (ndarray (n,)): vector with n features}
+\PY{l+s+sd}{      b (ndarray (n,)): vector with n features}
+\PY{l+s+sd}{    Returns:}
+\PY{l+s+sd}{      d (float) : distance}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}     }
+    \PY{n}{diff} \PY{o}{=} \PY{n}{a} \PY{o}{\PYZhy{}} \PY{n}{b}
+    \PY{n}{d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{diff}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}     }
+    \PY{k}{return} \PY{n}{d}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{a1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{]}\PY{p}{)}\PY{p}{;} \PY{n}{b1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{]}\PY{p}{)}
+\PY{n}{a2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.1}\PY{p}{,} \PY{l+m+mf}{2.1}\PY{p}{,} \PY{l+m+mf}{3.1}\PY{p}{]}\PY{p}{)}\PY{p}{;} \PY{n}{b2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{]}\PY{p}{)}
+\PY{n}{a3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{;}       \PY{n}{b3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{squared distance between a1 and b1: }\PY{l+s+si}{\PYZob{}}\PY{n}{sq\PYZus{}dist}\PY{p}{(}\PY{n}{a1}\PY{p}{,} \PY{n}{b1}\PY{p}{)}\PY{l+s+si}{:}\PY{l+s+s2}{0.3f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{squared distance between a2 and b2: }\PY{l+s+si}{\PYZob{}}\PY{n}{sq\PYZus{}dist}\PY{p}{(}\PY{n}{a2}\PY{p}{,} \PY{n}{b2}\PY{p}{)}\PY{l+s+si}{:}\PY{l+s+s2}{0.3f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{squared distance between a3 and b3: }\PY{l+s+si}{\PYZob{}}\PY{n}{sq\PYZus{}dist}\PY{p}{(}\PY{n}{a3}\PY{p}{,} \PY{n}{b3}\PY{p}{)}\PY{l+s+si}{:}\PY{l+s+s2}{0.3f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+squared distance between a1 and b1: 0.000
+squared distance between a2 and b2: 0.030
+squared distance between a3 and b3: 2.000
+    \end{Verbatim}
+
+    \textbf{Expected Output}:
+
+squared distance between a1 and b1: 0.000\\
+squared distance between a2 and b2: 0.030\\
+squared distance between a3 and b3: 2.000
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{21}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Public tests}
+\PY{n}{test\PYZus{}sq\PYZus{}dist}\PY{p}{(}\PY{n}{sq\PYZus{}dist}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{ansi-green-intense}{All tests passed!}
+    \end{Verbatim}
+
+    Click for hints
+
+While a summation is often an indication a for loop should be used, here
+the subtraction can be element-wise in one statement. Further, you can
+utilized np.square to square, element-wise, the result of the
+subtraction. np.sum can be used to sum the squared elements.
+
+    A matrix of distances between movies can be computed once when the model
+is trained and then reused for new recommendations without retraining.
+The first step, once a model is trained, is to obtain the movie feature
+vector, \(v_m\), for each of the movies. To do this, we will use the
+trained \texttt{item\_NN} and build a small model to allow us to run the
+movie vectors through it to generate \(v_m\).
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{input\PYZus{}item\PYZus{}m} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{num\PYZus{}item\PYZus{}features}\PY{p}{)}\PY{p}{)}    \PY{c+c1}{\PYZsh{} input layer}
+\PY{n}{vm\PYZus{}m} \PY{o}{=} \PY{n}{item\PYZus{}NN}\PY{p}{(}\PY{n}{input\PYZus{}item\PYZus{}m}\PY{p}{)}                                       \PY{c+c1}{\PYZsh{} use the trained item\PYZus{}NN}
+\PY{n}{vm\PYZus{}m} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{l2\PYZus{}normalize}\PY{p}{(}\PY{n}{vm\PYZus{}m}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}                        \PY{c+c1}{\PYZsh{} incorporate normalization as was done in the original model}
+\PY{n}{model\PYZus{}m} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{Model}\PY{p}{(}\PY{n}{input\PYZus{}item\PYZus{}m}\PY{p}{,} \PY{n}{vm\PYZus{}m}\PY{p}{)}                                
+\PY{n}{model\PYZus{}m}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model: "model\_1"
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                    Output Shape         Param \#     Connected to
+================================================================================
+==================
+input\_3 (InputLayer)            [(None, 16)]         0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+sequential\_1 (Sequential)       (None, 32)           41376       input\_3[0][0]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_2/Squa [(None, 32)]         0
+sequential\_1[1][0]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_2/Sum  [(None, 1)]          0
+tf\_op\_layer\_l2\_normalize\_2/Square
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_2/Maxi [(None, 1)]          0
+tf\_op\_layer\_l2\_normalize\_2/Sum[0]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_2/Rsqr [(None, 1)]          0
+tf\_op\_layer\_l2\_normalize\_2/Maximu
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+tf\_op\_layer\_l2\_normalize\_2 (Ten [(None, 32)]         0
+sequential\_1[1][0]
+tf\_op\_layer\_l2\_normalize\_2/Rsqrt[
+================================================================================
+==================
+Total params: 41,376
+Trainable params: 41,376
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+    \end{Verbatim}
+
+    Once you have a movie model, you can create a set of movie feature
+vectors by using the model to predict using a set of item/movie vectors
+as input. \texttt{item\_vecs} is a set of all of the movie vectors. It
+must be scaled to use with the trained model. The result of the
+prediction is a 32 entry feature vector for each movie.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{scaled\PYZus{}item\PYZus{}vecs} \PY{o}{=} \PY{n}{scalerItem}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{item\PYZus{}vecs}\PY{p}{)}
+\PY{n}{vms} \PY{o}{=} \PY{n}{model\PYZus{}m}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{scaled\PYZus{}item\PYZus{}vecs}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i\PYZus{}s}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{size of all predicted movie feature vectors: }\PY{l+s+si}{\PYZob{}}\PY{n}{vms}\PY{o}{.}\PY{n}{shape}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+size of all predicted movie feature vectors: (847, 32)
+    \end{Verbatim}
+
+    Let's now compute a matrix of the squared distance between each movie
+feature vector and all other movie feature vectors:
+
+    We can then find the closest movie by finding the minimum along each
+row. We will make use of
+\href{https://numpy.org/doc/1.21/user/tutorial-ma.html}{numpy masked
+arrays} to avoid selecting the same movie. The masked values along the
+diagonal won't be included in the computation.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{count} \PY{o}{=} \PY{l+m+mi}{50}  \PY{c+c1}{\PYZsh{} number of movies to display}
+\PY{n}{dim} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vms}\PY{p}{)}
+\PY{n}{dist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{dim}\PY{p}{,}\PY{n}{dim}\PY{p}{)}\PY{p}{)}
+
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{dim}\PY{p}{)}\PY{p}{:}
+    \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{dim}\PY{p}{)}\PY{p}{:}
+        \PY{n}{dist}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{sq\PYZus{}dist}\PY{p}{(}\PY{n}{vms}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{vms}\PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+        
+\PY{n}{m\PYZus{}dist} \PY{o}{=} \PY{n}{ma}\PY{o}{.}\PY{n}{masked\PYZus{}array}\PY{p}{(}\PY{n}{dist}\PY{p}{,} \PY{n}{mask}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{dist}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} mask the diagonal}
+
+\PY{n}{disp} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movie1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movie2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{count}\PY{p}{)}\PY{p}{:}
+    \PY{n}{min\PYZus{}idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{m\PYZus{}dist}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+    \PY{n}{movie1\PYZus{}id} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{item\PYZus{}vecs}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+    \PY{n}{movie2\PYZus{}id} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{item\PYZus{}vecs}\PY{p}{[}\PY{n}{min\PYZus{}idx}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+    \PY{n}{disp}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{p}{[}\PY{n}{movie\PYZus{}dict}\PY{p}{[}\PY{n}{movie1\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{movie\PYZus{}dict}\PY{p}{[}\PY{n}{movie1\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genres}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                  \PY{n}{movie\PYZus{}dict}\PY{p}{[}\PY{n}{movie2\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{movie\PYZus{}dict}\PY{p}{[}\PY{n}{movie1\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genres}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+               \PY{p}{)}
+\PY{n}{table} \PY{o}{=} \PY{n}{tabulate}\PY{o}{.}\PY{n}{tabulate}\PY{p}{(}\PY{n}{disp}\PY{p}{,} \PY{n}{tablefmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{html}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{firstrow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{table}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+'<table>\textbackslash{}n<thead>\textbackslash{}n<tr><th>movie1
+</th><th>genres                                             </th><th>movie2
+</th><th>genres
+</th></tr>\textbackslash{}n</thead>\textbackslash{}n<tbody>\textbackslash{}n<tr><td>Save the Last Dance (2001)
+</td><td>Drama|Romance                                      </td><td>Mona Lisa
+Smile (2003)                             </td><td>Drama|Romance
+</td></tr>\textbackslash{}n<tr><td>Wedding Planner, The (2001)
+</td><td>Comedy|Romance                                     </td><td>Mr. Deeds
+(2002)                                   </td><td>Comedy|Romance
+</td></tr>\textbackslash{}n<tr><td>Hannibal (2001)
+</td><td>Horror|Thriller                                    </td><td>Final
+Destination 2 (2003)                         </td><td>Horror|Thriller
+</td></tr>\textbackslash{}n<tr><td>Saving Silverman (Evil Woman) (2001)
+</td><td>Comedy|Romance                                     </td><td>Down with
+Love (2003)                              </td><td>Comedy|Romance
+</td></tr>\textbackslash{}n<tr><td>Down to Earth (2001)
+</td><td>Comedy|Fantasy|Romance                             </td><td>Bewitched
+(2005)                                   </td><td>Comedy|Fantasy|Romance
+</td></tr>\textbackslash{}n<tr><td>Mexican, The (2001)
+</td><td>Action|Comedy                                      </td><td>Rush Hour 2
+(2001)                                 </td><td>Action|Comedy
+</td></tr>\textbackslash{}n<tr><td>15 Minutes (2001)                       </td><td>Thriller
+</td><td>Panic Room (2002)                                  </td><td>Thriller
+</td></tr>\textbackslash{}n<tr><td>Enemy at the Gates (2001)               </td><td>Drama
+</td><td>Kung Fu Hustle (Gong fu) (2004)                    </td><td>Drama
+</td></tr>\textbackslash{}n<tr><td>Heartbreakers (2001)
+</td><td>Comedy|Crime|Romance                               </td><td>Fun with
+Dick and Jane (2005)                      </td><td>Comedy|Crime|Romance
+</td></tr>\textbackslash{}n<tr><td>Spy Kids (2001)
+</td><td>Action|Adventure|Children|Comedy                   </td><td>Tuxedo, The
+(2002)                                 </td><td>Action|Adventure|Children|Comedy
+</td></tr>\textbackslash{}n<tr><td>Along Came a Spider (2001)
+</td><td>Action|Crime|Mystery|Thriller                      </td><td>Insomnia
+(2002)                                    </td><td>Action|Crime|Mystery|Thriller
+</td></tr>\textbackslash{}n<tr><td>Blow (2001)                             </td><td>Crime|Drama
+</td><td>25th Hour (2002)                                   </td><td>Crime|Drama
+</td></tr>\textbackslash{}n<tr><td>Bridget Jones\&\#x27;s Diary (2001)
+</td><td>Comedy|Drama|Romance                               </td><td>Punch-Drunk
+Love (2002)                            </td><td>Comedy|Drama|Romance
+</td></tr>\textbackslash{}n<tr><td>Joe Dirt (2001)
+</td><td>Adventure|Comedy|Mystery|Romance                   </td><td>Polar
+Express, The (2004)
+</td><td>Adventure|Comedy|Mystery|Romance
+</td></tr>\textbackslash{}n<tr><td>Crocodile Dundee in Los Angeles (2001)
+</td><td>Comedy|Drama                                       </td><td>Bewitched
+(2005)                                   </td><td>Comedy|Drama
+</td></tr>\textbackslash{}n<tr><td>Mummy Returns, The (2001)
+</td><td>Action|Adventure|Comedy|Thriller                   </td><td>Rundown,
+The (2003)
+</td><td>Action|Adventure|Comedy|Thriller
+</td></tr>\textbackslash{}n<tr><td>Knight\&\#x27;s Tale, A (2001)
+</td><td>Action|Comedy|Romance                              </td><td>Legally
+Blonde (2001)                              </td><td>Action|Comedy|Romance
+</td></tr>\textbackslash{}n<tr><td>Shrek (2001)
+</td><td>Adventure|Animation|Children|Comedy|Fantasy|Romance</td><td>Tangled
+(2010)                                     </td><td>Adventure|Animation|Children
+|Comedy|Fantasy|Romance</td></tr>\textbackslash{}n<tr><td>Moulin Rouge (2001)
+</td><td>Drama|Romance                                      </td><td>Notebook,
+The (2004)                               </td><td>Drama|Romance
+</td></tr>\textbackslash{}n<tr><td>Pearl Harbor (2001)
+</td><td>Action|Drama|Romance                               </td><td>Bridget
+Jones: The Edge of Reason (2004)           </td><td>Action|Drama|Romance
+</td></tr>\textbackslash{}n<tr><td>Animal, The (2001)                      </td><td>Comedy
+</td><td>Dumb and Dumberer: When Harry Met Lloyd (2003)     </td><td>Comedy
+</td></tr>\textbackslash{}n<tr><td>Evolution (2001)                        </td><td>Comedy|Sci-
+Fi                                      </td><td>Behind Enemy Lines (2001)
+</td><td>Comedy|Sci-Fi
+</td></tr>\textbackslash{}n<tr><td>Swordfish (2001)
+</td><td>Action|Crime|Drama                                 </td><td>We Were
+Soldiers (2002)                            </td><td>Action|Crime|Drama
+</td></tr>\textbackslash{}n<tr><td>Atlantis: The Lost Empire (2001)
+</td><td>Adventure|Animation|Children|Fantasy               </td><td>Cloudy with
+a Chance of Meatballs (2009)
+</td><td>Adventure|Animation|Children|Fantasy
+</td></tr>\textbackslash{}n<tr><td>Lara Croft: Tomb Raider (2001)
+</td><td>Action|Adventure                                   </td><td>National
+Treasure: Book of Secrets (2007)          </td><td>Action|Adventure
+</td></tr>\textbackslash{}n<tr><td>Dr. Dolittle 2 (2001)                   </td><td>Comedy
+</td><td>Legally Blonde 2: Red, White \&amp; Blonde (2003)       </td><td>Comedy
+</td></tr>\textbackslash{}n<tr><td>Fast and the Furious, The (2001)
+</td><td>Action|Crime|Thriller                              </td><td>xXx (2002)
+</td><td>Action|Crime|Thriller
+</td></tr>\textbackslash{}n<tr><td>A.I. Artificial Intelligence (2001)
+</td><td>Adventure|Drama|Sci-Fi                             </td><td>Bubba Ho-
+tep (2002)                                </td><td>Adventure|Drama|Sci-Fi
+</td></tr>\textbackslash{}n<tr><td>Cats \&amp; Dogs (2001)
+</td><td>Children|Comedy                                    </td><td>Robots
+(2005)                                      </td><td>Children|Comedy
+</td></tr>\textbackslash{}n<tr><td>Scary Movie 2 (2001)                    </td><td>Comedy
+</td><td>Orange County (2002)                               </td><td>Comedy
+</td></tr>\textbackslash{}n<tr><td>Final Fantasy: The Spirits Within
+(2001)</td><td>Adventure|Animation|Fantasy|Sci-Fi
+</td><td>Madagascar: Escape 2 Africa (2008)
+</td><td>Adventure|Animation|Fantasy|Sci-Fi
+</td></tr>\textbackslash{}n<tr><td>Legally Blonde (2001)
+</td><td>Comedy|Romance                                     </td><td>Serendipity
+(2001)                                 </td><td>Comedy|Romance
+</td></tr>\textbackslash{}n<tr><td>Score, The (2001)
+</td><td>Action|Drama                                       </td><td>Punisher,
+The (2004)                               </td><td>Action|Drama
+</td></tr>\textbackslash{}n<tr><td>Jurassic Park III (2001)
+</td><td>Action|Adventure|Sci-Fi|Thriller                   </td><td>Men in
+Black II (a.k.a. MIIB) (a.k.a. MIB 2) (2002)</td><td>Action|Adventure|Sci-
+Fi|Thriller                   </td></tr>\textbackslash{}n<tr><td>America\&\#x27;s Sweethearts
+(2001)            </td><td>Comedy|Romance
+</td><td>Maid in Manhattan (2002)
+</td><td>Comedy|Romance
+</td></tr>\textbackslash{}n<tr><td>Ghost World (2001)
+</td><td>Comedy|Drama                                       </td><td>Station
+Agent, The (2003)                          </td><td>Comedy|Drama
+</td></tr>\textbackslash{}n<tr><td>Planet of the Apes (2001)
+</td><td>Action|Adventure|Drama|Sci-Fi                      </td><td>Day After
+Tomorrow, The (2004)                     </td><td>Action|Adventure|Drama|Sci-Fi
+</td></tr>\textbackslash{}n<tr><td>Princess Diaries, The (2001)
+</td><td>Children|Comedy|Romance                            </td><td>Lake House,
+The (2006)                             </td><td>Children|Comedy|Romance
+</td></tr>\textbackslash{}n<tr><td>Rush Hour 2 (2001)
+</td><td>Action|Comedy                                      </td><td>Mexican,
+The (2001)                                </td><td>Action|Comedy
+</td></tr>\textbackslash{}n<tr><td>American Pie 2 (2001)                   </td><td>Comedy
+</td><td>Rat Race (2001)                                    </td><td>Comedy
+</td></tr>\textbackslash{}n<tr><td>Others, The (2001)
+</td><td>Drama|Horror|Mystery|Thriller                      </td><td>The
+Machinist (2004)
+</td><td>Drama|Horror|Mystery|Thriller
+</td></tr>\textbackslash{}n<tr><td>Rat Race (2001)                         </td><td>Comedy
+</td><td>American Pie 2 (2001)                              </td><td>Comedy
+</td></tr>\textbackslash{}n<tr><td>Jay and Silent Bob Strike Back (2001)
+</td><td>Adventure|Comedy                                   </td><td>Mexican,
+The (2001)                                </td><td>Adventure|Comedy
+</td></tr>\textbackslash{}n<tr><td>Training Day (2001)
+</td><td>Crime|Drama|Thriller                               </td><td>Frailty
+(2001)                                     </td><td>Crime|Drama|Thriller
+</td></tr>\textbackslash{}n<tr><td>Zoolander (2001)                        </td><td>Comedy
+</td><td>Old School (2003)                                  </td><td>Comedy
+</td></tr>\textbackslash{}n<tr><td>Serendipity (2001)
+</td><td>Comedy|Romance                                     </td><td>Legally
+Blonde (2001)                              </td><td>Comedy|Romance
+</td></tr>\textbackslash{}n<tr><td>Mulholland Drive (2001)
+</td><td>Crime|Drama|Mystery|Thriller                       </td><td>Prisoners
+(2013)                                   </td><td>Crime|Drama|Mystery|Thriller
+</td></tr>\textbackslash{}n<tr><td>From Hell (2001)
+</td><td>Crime|Horror|Mystery|Thriller                      </td><td>Identity
+(2003)                                    </td><td>Crime|Horror|Mystery|Thriller
+</td></tr>\textbackslash{}n<tr><td>Waking Life (2001)
+</td><td>Animation|Drama|Fantasy                            </td><td>Warm Bodies
+(2013)                                 </td><td>Animation|Drama|Fantasy
+</td></tr>\textbackslash{}n<tr><td>K-PAX (2001)
+</td><td>Drama|Fantasy|Mystery|Sci-Fi                       </td><td>Gosford
+Park (2001)                                </td><td>Drama|Fantasy|Mystery|Sci-Fi
+</td></tr>\textbackslash{}n</tbody>\textbackslash{}n</table>'
+\end{Verbatim}
+\end{tcolorbox}
+        
+    The results show the model will generally suggest a movie with similar
+genre's.
+
+    \#\# 6 - Congratulations! You have completed a content-based recommender
+system.
+
+This structure is the basis of many commercial recommender systems. The
+user content can be greatly expanded to incorporate more information
+about the user if it is available. Items are not limited to movies. This
+can be used to recommend any item, books, cars or items that are similar
+to an item in your `shopping cart'.
+
+    Please click here if you want to experiment with any of the non-graded
+code.
+
+Important Note: Please only do this when you've already passed the
+assignment to avoid problems with the autograder.
+
+On the notebook's menu, click ``View'' \textgreater{} ``Cell Toolbar''
+\textgreater{} ``Edit Metadata''
+
+Hit the ``Edit Metadata'' button next to the code cell which you want to
+lock/unlock
+
+Set the attribute value for ``editable'' to:
+
+``true'' if you want to unlock it
+
+``false'' if you want to lock it
+
+\begin{verbatim}
+    </li>
+    <li> On the notebook’s menu, click “View” > “Cell Toolbar” > “None” </li>
+</ol>
+<p> Here's a short demo of how to do the steps above: 
+    <br>
+    <img src="https://lh3.google.com/u/0/d/14Xy_Mb17CZVgzVAgq7NCjMVBvSae3xO1" align="center" alt="unlock_cells.gif">
+\end{verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}

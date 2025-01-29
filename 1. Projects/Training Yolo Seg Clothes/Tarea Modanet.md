@@ -1,0 +1,2 @@
+- [ ] Descargar dataset Modanet
+- [ ] Entrenar YoloV8-Seg con Dataset Modanet para poder probarlo

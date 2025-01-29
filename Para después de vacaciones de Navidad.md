@@ -1,0 +1,5 @@
+Para seguir con la tarea de BioObserver, lo único que queda es que el despliegue continuo de gitlab meta automáticamente las .dll de gstreamer en la carpeta de binarios, porque actualmente no lo hace. Con esto ya tendríamos el tag v3.0.5 de BioObserver listo para entregar y funcionando en Windows perfectamente.
+
+Para la versión v4.0.0, lo que quedaría sería introducir todo el código dentro de la carpeta C:\Users\windows-research\Documents\bio-observer-v3.0.4 dentro del repositorio dentro de la ruta C:\Users\windows-research\Documents\BIOOBSERVER\bio-observer, compilar y comprobar que todo funciona, añadir los dlls de whisper así como la descarga del modelo base, y actualizar el gitlab ci, con eso ya tendríamos la versión v4.0.0. Recordar que los comandos para compilar están dentro de compile.bat o al final del CMakeLists.txt, también habría que actualizar el README del repo.
+
+Para terminar, lo que quedaría sería desacoplar la clase de whisper para poder utilizarla cuando queramos sin ningún tipo de problema. 

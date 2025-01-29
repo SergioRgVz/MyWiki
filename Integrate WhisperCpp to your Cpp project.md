@@ -1,0 +1,1 @@
+https://medium.com/@bhuwanmishra_59371/a-starter-guide-to-whisper-cpp-f238817fd876

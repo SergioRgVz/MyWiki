@@ -1,0 +1,288 @@
+{
+  "main": {
+    "id": "a359c591a1582246",
+    "type": "split",
+    "children": [
+      {
+        "id": "f625c5ec02897d23",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "37f687de05deec1c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Nuevo proyecto.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Nuevo proyecto"
+            }
+          },
+          {
+            "id": "132f3510e541f9dc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1. Projects/Algorithms/Sorting/Bubble Sort.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Bubble Sort"
+            }
+          },
+          {
+            "id": "81d8cdba278f5a9f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Roadmap Enero - Mitad de abril.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Roadmap Enero - Mitad de abril"
+            }
+          },
+          {
+            "id": "9ed0445133801483",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Binary Search.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Binary Search"
+            }
+          },
+          {
+            "id": "61f4ff5e1a44ad0e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Obtaining human feedback.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Obtaining human feedback"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4a259a0163459263",
+    "type": "split",
+    "children": [
+      {
+        "id": "3aded8fb26ecc042",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "31a5a028e2c1774b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "9232f6aa8329e85b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "quick",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "28a29d5b51442c2c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 275.5
+  },
+  "right": {
+    "id": "48bdb42bcc3c3708",
+    "type": "split",
+    "children": [
+      {
+        "id": "571306d2cd71a795",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d2e6feb1e5276199",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "2. Area/Herta/VPN.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes de VPN"
+            }
+          },
+          {
+            "id": "b2de701134c0470c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "2. Area/Herta/VPN.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes de VPN"
+            }
+          },
+          {
+            "id": "7295ed013a9710f7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "c5e0be223d5c4e38",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "2. Area/Herta/VPN.md"
+              },
+              "icon": "lucide-list",
+              "title": "Esquema de VPN"
+            }
+          },
+          {
+            "id": "8e688f5b3abe51a9",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 305.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-projects:Open projects": false,
+      "obsidian-kanban:Create new board": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "obsidian-hypothesis-plugin:Sync your hypothesis highlights": false,
+      "periodic-notes:Open today": false
+    }
+  },
+  "active": "9ed0445133801483",
+  "lastOpenFiles": [
+    "1. Projects/Algorithms/Searching/Index.md",
+    "Binary Search.md",
+    "1. Projects/Algorithms/Searching/Linear Search.md",
+    "Journal/daily/2025-01-29.md",
+    "1. Projects/Algorithms/Sorting/Heap Sort.md",
+    "1. Projects/Algorithms/Sorting/Index.md",
+    "1. Projects/Algorithms/Sorting/Merge Sort.md",
+    "1. Projects/Algorithms/Sorting/Bubble Sort.md",
+    "Roadmap Abril - Julio.md",
+    "Roadmap Enero - Mitad de abril.md",
+    "Journal/daily/2025-01-28.md",
+    "1. Projects/Algorithms/Sorting/Quick Sort.md",
+    "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132515.png",
+    "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132513.png",
+    "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132511.png",
+    "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132015.png",
+    "1. Projects/Algorithms/Sorting/resources",
+    "Journal/daily/2025-01-23.md",
+    "2. Area/Herta/VPN.md",
+    "Nuevo proyecto.md",
+    "DataBlock FastAi.md",
+    "Integrate WhisperCpp to your Cpp project.md",
+    "1. Projects/Generative AI/Obtaining human feedback.md",
+    "Journal/daily/2025-01-22.md",
+    "1. Projects/Portfolio/Web Portfolio.md",
+    "1. Projects/Portfolio/Plan to action.md",
+    "1. Projects/Portfolio/Ideas Proyectos Portfolio.md",
+    "1. Projects/Portfolio/DSA App.md",
+    "1. Projects/Portfolio/App de tracking de empleos aplicados.md",
+    "1. Projects/Portfolio/App Dashcam.md",
+    "1. Projects/Portfolio/Análisis de vídeo en tiempo real.md",
+    "1. Projects/Algorithms/Traversal",
+    "1. Projects/Algorithms/Randomized",
+    "1. Projects/Algorithms/Brute Force",
+    "1. Projects/Algorithms/Cryptographic",
+    "1. Projects/Algorithms/Machine Learning",
+    "1. Projects/Algorithms/Numerical",
+    "1. Projects/Algorithms/Recursive",
+    "1. Projects/Algorithms/Optimization",
+    "1. Projects/Algorithms/String Matching and Manipulation",
+    "1. Projects/Generative AI/resources/Pasted image 20250117133758.png",
+    "1. Projects/Generative AI/resources/Pasted image 20250117121901.png",
+    "1. Projects/Generative AI/resources/Pasted image 20250114091639.png",
+    "resources/Pasted image 20250108154809.png",
+    "1. Projects/Generative AI/resources/Pasted image 20250108154512.png",
+    "resources/Pasted image 20250108152500.png",
+    "Sin título.canvas"
+  ]
+}

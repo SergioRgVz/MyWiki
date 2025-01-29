@@ -1,0 +1,1 @@
+- [**Scaling Laws for Neural Language Models**](https://arxiv.org/abs/2001.08361) - empirical study by researchers at OpenAI exploring the scaling laws for large language models.

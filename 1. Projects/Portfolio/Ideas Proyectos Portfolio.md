@@ -1,0 +1,11 @@
+- [ ] [[Web Portfolio]]
+- [ ] [[Análisis de emoción]]
+- [ ] [[Análisis de vídeo en tiempo real]]
+- [ ] [[App Dashcam]]
+- [ ] [[DSA App]]
+- [ ] [[App de tracking de empleos aplicados]]
+- [ ] [[App de restauración de fotos rotas en trozos, restauración de foto quemada, pintar foto antigua o mejorar su calidad]]
+- [ ] [[Robot con Raspberry pi para seguir a un gato (u otra cosa)]]
+- [ ] [[App de raspberry pi para en base a una cámara apuntando a los cuencos del animal saber si están vacíos y mandar un mensaje a telegram]]
+- [ ] [[Herramienta de autoanotación con modelo 3d]]
+- [ ] Trader crypto automaticamente
