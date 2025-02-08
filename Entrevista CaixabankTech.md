@@ -1,0 +1,1 @@
+# ¿Para vuestros modelos, usáis todos los servicios de Google Cloud como las APIs preentrenadas, los entrenáis con BigQuery, con AutoML o por otro lado tenéis entrenamientos custom?

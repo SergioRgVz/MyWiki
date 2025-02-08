@@ -94,3 +94,15 @@ if __name__ == '__main__':
     - Average Case: $O(log\ N)$
     - Worst Case: $O(log\ N)$
 - ***Auxiliary Space:*** $O(1)$, If the recursive call stack is considered then the auxiliary space will be $O(log\ N)$.
+
+## ***Advantages of Binary Search**
+
+- Binary search is faster than linear search, especially for large arrays.
+- More efficient than other searching algorithms with a similar time complexity, such as interpolation search or exponential search.
+- Binary search is well-suited for searching large datasets that are stored in external memory, such as on a hard drive or in the cloud.
+
+## ***Disadvantages of Binary Search***
+
+- The array should be sorted.
+- Binary search requires that the data structure being searched be stored in contiguous memory locations. 
+- Binary search requires that the elements of the array be comparable, meaning that they must be able to be ordered.

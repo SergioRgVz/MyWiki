@@ -2,7 +2,6 @@
   "attachmentFolderPath": "./resources",
   "readableLineLength": false,
   "focusNewTab": true,
-  "showRibbon": true,
   "vimMode": false,
   "alwaysUpdateLinks": true
 }
