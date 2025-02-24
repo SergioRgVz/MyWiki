@@ -11,17 +11,42 @@
             "id": "4f1c4a05fb3d3d55",
             "type": "leaf",
             "state": {
-              "type": "split-diff-view",
+              "type": "markdown",
               "state": {
-                "aFile": ".obsidian/community-plugins.json",
-                "bFile": ".obsidian/community-plugins.json",
-                "aRef": ""
+                "file": "3. Resources/CV/Resume English.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "diff",
-              "title": "Diff: community-plugins.json"
+              "icon": "lucide-file",
+              "title": "Resume English"
+            }
+          },
+          {
+            "id": "468612866cae0e0a",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "1. Projects/Learning Unsupervised Learning, Recommenders, Reinforcement Learning/resources/Pasted image 20241013193431 1.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20241013193431 1"
+            }
+          },
+          {
+            "id": "456c9588b0536747",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "resources/Pasted image 20250204124646.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20250204124646"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -78,7 +103,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 275.5
+    "width": 411.5
   },
   "right": {
     "id": "48bdb42bcc3c3708",
@@ -190,40 +215,46 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4f1c4a05fb3d3d55",
+  "active": "31a5a028e2c1774b",
   "lastOpenFiles": [
-    "Journal/daily/2025-02-24.md",
-    "Usar APIs preentrenadas Google Cloud.md",
-    "Pre-trained APIs GCloud.md",
-    "Software Engineer Python (Materialise).md",
-    "resources/Pasted image 20250204124646.png",
     "resources/Pasted image 20250204124132.png",
+    "resources/Pasted image 20250108154809.png",
+    "resources/Pasted image 20250108152500.png",
+    "resources/Pasted image 20250108152423.png",
+    "resources/Pasted image 20241112082818.png",
+    "resources/Pasted image 20241112082750.png",
+    "resources/Pasted image 20241112082749 1.png",
+    "resources/Pasted image 20241112082749.png",
+    "Roadmap Abril - Julio.md",
+    "Usar APIs preentrenadas Google Cloud.md",
+    "Roadmap Enero - Mitad de abril.md",
+    "Software Engineer Python (Materialise).md",
+    "Pre-trained APIs GCloud.md",
     "Entrevista CaixabankTech.md",
     "Entrenar un modelo en bigquery.md",
-    "CV Español.md",
-    "Journal/daily/2025-02-04.md",
-    "Integrate WhisperCpp to your Cpp project.md",
     "DataBlock FastAi.md",
-    "Nuevo proyecto.md",
-    "Resume English.md",
-    "Roadmap Abril - Julio.md",
-    "Roadmap Enero - Mitad de abril.md",
-    "b.md",
+    "1. Projects/Learning Unsupervised Learning, Recommenders, Reinforcement Learning/resources/Pasted image 20241013193431 1.png",
+    "1. Projects/Learning Unsupervised Learning, Recommenders, Reinforcement Learning/resources/Pasted image 20241013190214 1.png",
+    "1. Projects/Learning Unsupervised Learning, Recommenders, Reinforcement Learning/Reinforcement Learning 1.md",
+    "2. Area/Herta/Nuevo proyecto.md",
+    "4. Archive/Reflexión de carrera.md",
+    "a.md",
+    "2. Area/Herta/Integrate WhisperCpp to your Cpp project.md",
+    "2. Area/Herta/Para después de vacaciones de Navidad.md",
+    "3. Resources/CV/CV Español.md",
+    "3. Resources/CV/Resume English.md",
+    "3. Resources/CV",
+    "4. Archive",
+    "Journal/daily/2025-02-24.md",
+    "resources/Pasted image 20250204124646.png",
+    "Journal/daily/2025-02-04.md",
     "Journal/daily/2025-01-31.md",
     "1. Projects/Algorithms/Sorting/Bubble Sort.md",
     "1. Projects/Algorithms/Searching/Binary Search.md",
     "Journal/daily/2025-01-30.md",
-    "a.md",
     "1. Projects/Portfolio/Ideas Proyectos Portfolio.md",
     "1. Projects/Algorithms/Searching/Index.md",
     "1. Projects/Algorithms/Searching/Linear Search.md",
-    "Journal/daily/2025-01-29.md",
-    "1. Projects/Algorithms/Sorting/Heap Sort.md",
-    "1. Projects/Algorithms/Sorting/Index.md",
-    "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132515.png",
-    "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132513.png",
-    "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132511.png",
-    "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132015.png",
     "1. Projects/Algorithms/Sorting/resources",
     "1. Projects/Algorithms/Traversal",
     "1. Projects/Algorithms/Randomized",
@@ -232,12 +263,6 @@
     "1. Projects/Algorithms/Machine Learning",
     "1. Projects/Algorithms/Numerical",
     "1. Projects/Algorithms/Recursive",
-    "1. Projects/Algorithms/Optimization",
-    "1. Projects/Algorithms/String Matching and Manipulation",
-    "1. Projects/Generative AI/resources/Pasted image 20250117133758.png",
-    "1. Projects/Generative AI/resources/Pasted image 20250117121901.png",
-    "1. Projects/Generative AI/resources/Pasted image 20250114091639.png",
-    "resources/Pasted image 20250108154809.png",
     "Sin título.canvas"
   ]
 }
