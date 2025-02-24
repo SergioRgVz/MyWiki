@@ -4,123 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "affb49bfebec1016",
+        "id": "71596284274c22b0",
         "type": "tabs",
         "children": [
           {
-            "id": "8b8aea84a94747e4",
+            "id": "4f1c4a05fb3d3d55",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "Journal/daily/2025-01-31.md",
-                "mode": "source",
-                "source": false
+                "aFile": ".obsidian/community-plugins.json",
+                "bFile": ".obsidian/community-plugins.json",
+                "aRef": ""
               },
-              "icon": "lucide-file",
-              "title": "2025-01-31"
-            }
-          },
-          {
-            "id": "7e7d289aea11cf14",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CV Español.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "CV Español"
-            }
-          },
-          {
-            "id": "94046e08cf1ea274",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Nuevo proyecto.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Nuevo proyecto"
-            }
-          },
-          {
-            "id": "539364a5401524c1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Journal/daily/2025-02-04.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-02-04"
-            }
-          },
-          {
-            "id": "6252991e8b334981",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Entrenar un modelo en bigquery.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Entrenar un modelo en bigquery"
-            }
-          },
-          {
-            "id": "994dc2b131bdfc05",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Entrevista CaixabankTech.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Entrevista CaixabankTech"
-            }
-          },
-          {
-            "id": "5ab3e1807dbaf934",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Pre-trained APIs GCloud.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Pre-trained APIs GCloud"
-            }
-          },
-          {
-            "id": "9e501cad7b2a105f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Usar APIs preentrenadas Google Cloud.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Usar APIs preentrenadas Google Cloud"
+              "icon": "diff",
+              "title": "Diff: community-plugins.json"
             }
           }
-        ],
-        "currentTab": 7
+        ]
       }
     ],
     "direction": "vertical"
@@ -143,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Explorador de archivos"
+              "title": "Files"
             }
           },
           {
@@ -254,9 +155,19 @@
               "icon": "calendar-with-checkmark",
               "title": "Calendar"
             }
+          },
+          {
+            "id": "59715b7617fc0e0d",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -264,24 +175,26 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Abrir selector rápido": false,
-      "graph:Abrir vista gráfica": false,
-      "canvas:Crear nuevo lienzo": false,
-      "daily-notes:Abrir la nota de hoy": false,
-      "templates:Insertar plantilla": false,
-      "command-palette:Abrir paleta de comandos": false,
-      "templater-obsidian:Templater": false,
-      "obsidian-projects:Open projects": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
       "obsidian-kanban:Create new board": false,
+      "obsidian-projects:Open projects": false,
+      "periodic-notes:Open today": false,
+      "templater-obsidian:Templater": false,
       "obsidian-excalidraw-plugin:Create new drawing": false,
       "obsidian-hypothesis-plugin:Sync your hypothesis highlights": false,
-      "periodic-notes:Open today": false
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "9e501cad7b2a105f",
+  "active": "4f1c4a05fb3d3d55",
   "lastOpenFiles": [
-    "Pre-trained APIs GCloud.md",
+    "Journal/daily/2025-02-24.md",
     "Usar APIs preentrenadas Google Cloud.md",
+    "Pre-trained APIs GCloud.md",
     "Software Engineer Python (Materialise).md",
     "resources/Pasted image 20250204124646.png",
     "resources/Pasted image 20250204124132.png",
@@ -307,7 +220,6 @@
     "Journal/daily/2025-01-29.md",
     "1. Projects/Algorithms/Sorting/Heap Sort.md",
     "1. Projects/Algorithms/Sorting/Index.md",
-    "1. Projects/Algorithms/Sorting/Merge Sort.md",
     "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132515.png",
     "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132513.png",
     "1. Projects/Algorithms/Sorting/resources/Pasted image 20250123132511.png",
